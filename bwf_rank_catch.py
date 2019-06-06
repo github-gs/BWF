@@ -42,11 +42,11 @@ class BWF:
         type=[number_index,type_text]       ##### a list
         return type
 
-    def rank_pattern(self,type):               ############ distinguish the soup pattern according different palyer types
+    def rank_pattern(self,type):               ############ distinguish the soup pattern according different player types
         if type[0]=='6' or type[0]=='7':
-            rank_pattern = re.compile('\n(.*)\n\n\n\n\n                \t(.*)\t\t\t\t\n\n\n\n\n\n\n\n\n                        (.*)                    \n\n\n\n\n\n')
+            rank_pattern = re.compile('\n(.*)\n\n\n\n\n                \t(.*)\t\t\t\t\n\n\n\n\n\n\n\n\n                        (.*)                    \n\n\n\n\n\n(.*)\n\n\n\n            (.*)        \n\n(.*)\n\n\n(.*)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
         if type[0]=='8' or type[0]=='9' or type[0]=='10':
-            rank_pattern = re.compile('\n\n\n\n\n\n(.*)\n\n\n\n\n                \t(.*) \n                \n\n\n\n\n                \t(.*)                \n\n\n\n\n\n\n\n(.*)\n\n\n(.*)\n\n\n\n\n\n')
+            rank_pattern = re.compile('\n(.*)\n\n\n\n\n                \t(.*) \n                \n\n\n\n\n                \t(.*)                \n\n\n\n\n\n\n\n(.*)\n\n\n(.*)\n\n\n\n\n\n(.*)\n\n\n\n            (.*)        \n\n(.*)\n\n\n(.*)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
         return rank_pattern
 
 
@@ -64,7 +64,7 @@ class BWF:
                 break
             else:
                 soup = BeautifulSoup(html, 'html.parser')
-                date_pattern = re.compile('Last updated :  (.*)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBWF WORLD RANKINGS')
+                date_pattern = re.compile('Last updated :  (.*)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBWF WORLD RANKINGS\n')
                 rank_pattern = Rank_pattern
                 result = rank_pattern.findall(soup.get_text())
                 update_date = date_pattern.findall(soup.get_text())
@@ -76,18 +76,20 @@ class BWF:
     def printf(self,rank,update_date,type_number):             ######### print the information 
         print('\n'+'Last update time: ' + update_date[0]+'\n')
         if type_number=='6' or type_number=='7':
-            print('BWF_RANK  COUNTRY  NAME' + '\n')
+            print('BWF_RANK    COUNTRY    NAME    CHANGE    WIN-LOSE    PRIZE    POINTS/TOURNAMENTS ' + '\n')
             print_item = rank
             for item in print_item:
                 if int(item[0]) <= self.rank_low and int(item[0]) >= self.rank_hign:
-                    print(item[0] + '  ' + item[1] + '  ' + item[2])
+                    print('    '.join(item))
         else:
-            print('BWF_RANK  COUNTRY  NAME' + '\n')
+            print('BWF_RANK    COUNTRY    NAME    CHANGE    WIN-LOSE    PRIZE    POINTS/TOURNAMENTS ' + '\n')
             print_item = rank
             for item in print_item:
                 if int(item[0]) <= self.rank_low and int(item[0]) >= self.rank_hign:
-                    print(item[0] + '  ' + item[1] + '  ' + item[3])
-                    print(item[0] + '  ' + item[2] + '  ' + item[4]+'\n')
+                    double1=[item[0],item[1],item[3],item[5],item[6],item[7],item[8]]
+                    double2=[item[0],item[1],item[4],item[5],item[6],item[7],item[8]]
+                    print('    '.join(double1))
+                    print('    '.join(double2)+'\n')
 
 
 ########### Let's do it!
