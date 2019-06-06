@@ -1,3 +1,6 @@
+环境：Anaconda 2019.03 , python 3.7.3
 
 现已可以查询男单，男双，女单，女双，混双世界排名信息，其他功能有待完善
+
+Usage:
 命令行运行 $$$ python bwf_ranking.py
