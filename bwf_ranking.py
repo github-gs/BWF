@@ -44,9 +44,9 @@ class BWF:
 
     def rank_pattern(self,type):               ############ distinguish the soup pattern according different player types
         if type[0]=='6' or type[0]=='7':
-            rank_pattern = re.compile('\n(.*)\n\n\n\n\n                \t(.*)\t\t\t\t\n\n\n\n\n\n\n\n\n                        (.*)                    \n\n\n\n\n\n(.*)\n\n\n\n            (.*)        \n\n(.*)\n\n\n(.*)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
+            rank_pattern = re.compile('\n(.*)\n\n\n\n\n                \t(.*)\t\t\t\t\n\n\n\n\n\n\n\n\n                        (.*)                    \n\n\n\n\n\n(.*)\n\n\n\n            (.*)        \n\n(.*)\n\n\n(.*)\n\n\n')
         if type[0]=='8' or type[0]=='9' or type[0]=='10':
-            rank_pattern = re.compile('\n(.*)\n\n\n\n\n                \t(.*) \n                \n\n\n\n\n                \t(.*)                \n\n\n\n\n\n\n\n(.*)\n\n\n(.*)\n\n\n\n\n\n(.*)\n\n\n\n            (.*)        \n\n(.*)\n\n\n(.*)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
+            rank_pattern = re.compile('\n(.*)\n\n\n\n\n                \t(.*) \n                \n\n\n\n\n                \t(.*)                \n\n\n\n\n\n\n\n(.*)\n\n\n(.*)\n\n\n\n\n\n(.*)\n\n\n\n            (.*)        \n\n(.*)\n\n\n(.*)\n\n\n')
         return rank_pattern
 
 
